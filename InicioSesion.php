@@ -1,6 +1,15 @@
 <?php
 
-          //Matriz de usuarios y contraseñas
+        class usuario{
+
+             function __construct()
+            {
+                
+            }
+
+            public function VerificarUsuario()
+            {
+                          //Matriz de usuarios y contraseñas
           $nombres_usuarios = ['admin', 'usuario1', 'usuario2'];
           $contrasenas      = ['12345', 'abcde', '123abc'];
 
@@ -21,13 +30,13 @@
                 
                     // Comprobar el tipo de usuario.
                     if( $usuario === 'admin') {
-                        require_once('eventos1.php');
+                        return 'admin';
                         //linea de codigo de enlace para enviar al usuario 1 a su pagina de eventos 
                     } elseif ( $usuario === 'usuario1') {
-                        require_once('eventos2.php');
+                        return 'usuario1';
                         //linea de codigo de enlace para enviar al usuario 2 a su pagina de eventos 
                     } else {
-                        require_once('eventos3.php');
+                        return 'usuario2';
                         //linea de codigo de enlace para enviar al usuario 3 a su pagina de eventos 
                     }
                    
@@ -36,5 +45,9 @@
                 }
                 } else {
                     print ('Usuario inválido');
-              }      
+              } 
+            }
+   
+            }
+              
 ?>

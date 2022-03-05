@@ -44,7 +44,10 @@
             </div>
             <?php
             include_once('class/evento.class.php');
+            include_once('class/InicioSesion.php');
             $evento = new eventoXusuario();
+            $user = new usuario();
+            $Usuario = $user->VerificarUsuario();
 
             if (isset($_POST['enviar'])) {
                 $title = $_POST['title'];
@@ -54,11 +57,10 @@
                 $timestamp = strtotime($date);
                 $newDate = date("d/m/Y", $timestamp);
 
-                $evento->agregarEvento($title, $newDate, $desc, 'admin');
+                $evento->agregarEvento($title, $newDate, $desc, $Usuario);
             }
-
-            $eventos = $evento->obtenerEventos('admin');
-            $eventosOrdenados = $evento->ordenarXfecha('admin');
+            $eventos = $evento->obtenerEventos($Usuario);
+            $eventosOrdenados = $evento->ordenarXfecha($Usuario);
             echo'<div class="row g-3">';
             foreach ($eventosOrdenados as $event) {
                 echo "<div class=\"card col-3\" style=\"width: 18rem;\">";
@@ -70,6 +72,8 @@
                 echo "</div>";
             }
             echo'</div>';
+        
+
             ?>
         </div>
 </body>
