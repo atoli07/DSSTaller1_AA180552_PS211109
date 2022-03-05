@@ -54,11 +54,11 @@
                 $timestamp = strtotime($date);
                 $newDate = date("d/m/Y", $timestamp);
 
-                $evento->agregarEvento($title, $newDate, $desc, 'usuario3');
+                $evento->agregarEvento($title, $newDate, $desc, 'usuario2');
             }
 
-            $eventos = $evento->obtenerEventos('usuario3');
-            $eventosOrdenados = $evento->ordenarXfecha('usuario3');
+            $eventos = $evento->obtenerEventos('usuario2');
+            $eventosOrdenados = $evento->ordenarXfecha('usuario2');
             echo'<div class="row g-3">';
             foreach ($eventosOrdenados as $event) {
                 echo "<div class=\"card col-3\" style=\"width: 18rem;\">";

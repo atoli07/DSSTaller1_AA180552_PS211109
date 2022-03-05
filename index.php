@@ -22,7 +22,7 @@
                       <i class="bi bi-person-fill"></i>
                 </div>
                 <div class="inputIcon">
-                    <input type="text" name="password" id="password" 
+                    <input type="password" name="password" id="password"
                     placeholder="Ingrese su contraseña" required>
                      <i class="bi bi-lock-fill"></i>
                 </div> 
