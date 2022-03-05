@@ -21,13 +21,13 @@
                 
                     // Comprobar el tipo de usuario.
                     if( $usuario === 'admin') {
-                        print ('hola admin');
+                        require_once('eventos1.php');
                         //linea de codigo de enlace para enviar al usuario 1 a su pagina de eventos 
                     } elseif ( $usuario === 'usuario1') {
-                        print ('hola  usuario 2');
+                        require_once('eventos2.php');
                         //linea de codigo de enlace para enviar al usuario 2 a su pagina de eventos 
                     } else {
-                        print ('hola  usuario 3');
+                        require_once('eventos3.php');
                         //linea de codigo de enlace para enviar al usuario 3 a su pagina de eventos 
                     }
                    
