@@ -3,7 +3,6 @@ class evento{
     protected $titulo;
     protected $fecha;
     protected $descripcion;
-    protected $usuario;
 
     function __construct($title='', $date=null, $desc='')
     {
@@ -26,17 +25,6 @@ class evento{
     {
        return $this->descripcion; 
     }
-
-    function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    function addUsuario($user)
-    {
-        $this->usuario=$user;
-    }
-
 }
 
 class eventoXusuario{
@@ -46,9 +34,13 @@ class eventoXusuario{
     function __construct()
     {
         $this->eventos= array(
+            'admin'=>array(
+                new evento('Entregar taller 1', '05/03/2022', 'Verificar bien que se mande un txt con el video'),
+                new evento('Sacar a pasear al perro', '07/03/2022', 'Sacarlo a las 3:30, NO olvidar bolsas')
+            ), 
             'usuario1'=>array(
                 new evento('Lavar la ropa', '05/03/2022', 'Lavar solo ropa de color'),
-                new evento('Cumple de la abue', '10/03/2022', 'LLevar las velas y el pastel')
+                new evento('Ir a la U', '11/03/2022', 'Salón 6.2.3, a las 7:00 AM')
             ), 
             'usuario2'=>array(
                 new evento('Bañar al perro', '06/03/2022', 'No olvidar echarle veneno para las pulgas')
@@ -77,5 +69,21 @@ class eventoXusuario{
             );
         }  
     }
+
+    public function ordenarXfecha($usuario)
+    {
+        $longitud = count($this->eventos[$usuario]);
+        for ($i = 0; $i < $longitud; $i++) {
+            for ($j = 0; $j < $longitud - 1; $j++) {
+                $fecha1=strtotime($this->eventos[$usuario][$j]->getFecha());
+                $fecha2=strtotime($this->eventos[$usuario][$j + 1]->getFecha());
+                if ($fecha1> $fecha2) {
+                    $temporal =$this->eventos[$usuario][$j];
+                    $this->eventos[$usuario][$j] = $this->eventos[$usuario][$j + 1];
+                    $this->eventos[$usuario][$j + 1] = $temporal;
+                }
+            }
+        }
+        return $this->eventos[$usuario];
+    }
 }
-?>

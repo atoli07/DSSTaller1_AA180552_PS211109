@@ -21,9 +21,9 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <fieldset>
-            <legend>Añadir nuevo evento</legend>
-            <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                <legend>Agregar nuevo evento</legend>
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="row g-3">
                     <div class="form-floating col-md-6">
                         <input type="text" class="form-control" id="floatingInput" name="title">
@@ -41,34 +41,37 @@
                         <button type="submit" class="btn btn-outline-info" name="enviar">Guardar</button>
                     </div>
                 </form>
-        </fieldset>
-        <?php
-        include_once('class/evento.class.php');
-        $evento=new eventoXusuario();
+            </div>
+            <?php
+            include_once('class/evento.class.php');
+            $evento = new eventoXusuario();
 
-        if (isset($_POST['enviar'])) {
-            $title = $_POST['title'];
-            $date = $_POST['date'];
-            $desc = $_POST['desc'];
+            if (isset($_POST['enviar'])) {
+                $title = $_POST['title'];
+                $date = $_POST['date'];
+                $desc = $_POST['desc'];
 
-            $timestamp = strtotime($date); 
-            $newDate = date("d/m/Y", $timestamp);
+                $timestamp = strtotime($date);
+                $newDate = date("d/m/Y", $timestamp);
 
-            $evento->agregarEvento($title, $newDate, $desc, 'usuario2');
-        }
+                $evento->agregarEvento($title, $newDate, $desc, 'usuario1');
+            }
 
-        $eventos = $evento->obtenerEventos('usuario2');
-        foreach ($eventos as $event) {
-            echo "<div class=\"card col-3\" style=\"width: 18rem;\">";
-            echo "<div class=\"card-body\">";
-            echo "<h5 class=\"card-title\">" . $event->getTitulo() . "</h5>";
-            echo '<h6 class="card-subtitle mb-2 text-muted">' . $event->getFecha() . '</h6>';
-            echo '<p class="card-text">' . $event->getDescripcion() . '</p>';
-            echo "</div>";
-            echo "</div>";
-        }
-        ?>
-    </div>
+            $eventos = $evento->obtenerEventos('usuario1');
+            $eventosOrdenados = $evento->ordenarXfecha('usuario1');
+            echo'<div class="row g-3">';
+            foreach ($eventosOrdenados as $event) {
+                echo "<div class=\"card col-3\" style=\"width: 18rem;\">";
+                echo "<div class=\"card-body\">";
+                echo "<h5 class=\"card-title\">" . $event->getTitulo() . "</h5>";
+                echo '<h6 class="card-subtitle mb-2 text-muted">' . $event->getFecha() . '</h6>';
+                echo '<p class="card-text">' . $event->getDescripcion() . '</p>';
+                echo "</div>";
+                echo "</div>";
+            }
+            echo'</div>';
+            ?>
+        </div>
 </body>
 
 </html>
