@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <nav class="navbar sticky-top navbar-light" id="barra">
         <div class="container-fluid">
@@ -38,15 +36,18 @@
                         <label for="floatingTextarea2">Descripción</label>
                     </div>
                     <div class="d-flex flex-row-reverse ">
-                        <button type="submit" class="btn btn-outline-info" name="enviar">Guardar</button>
+                        <button type="submit" class="btn btn-outline-info" name="guardar">Guardar</button>
                     </div>
                 </form>
             </div>
             <?php
             include_once('class/evento.class.php');
+            include_once('<class/InicioSesion.php');
             $evento = new eventoXusuario();
-
-            if (isset($_POST['enviar'])) {
+            $user = new usuario();
+            $Usuario = $user->VerificarUsuario();
+            
+            if (isset($_POST['guardar'])) {
                 $title = $_POST['title'];
                 $date = $_POST['date'];
                 $desc = $_POST['desc'];
@@ -54,11 +55,10 @@
                 $timestamp = strtotime($date);
                 $newDate = date("d/m/Y", $timestamp);
 
-                $evento->agregarEvento($title, $newDate, $desc, 'usuario1');
+                $evento->agregarEvento($title, $newDate, $desc, $Usuario);
             }
-
-            $eventos = $evento->obtenerEventos('usuario1');
-            $eventosOrdenados = $evento->ordenarXfecha('usuario1');
+            $eventos = $evento->obtenerEventos($Usuario);
+            $eventosOrdenados = $evento->ordenarXfecha($Usuario);
             echo'<div class="row g-3">';
             foreach ($eventosOrdenados as $event) {
                 echo "<div class=\"card col-3\" style=\"width: 18rem;\">";
@@ -73,5 +73,4 @@
             ?>
         </div>
 </body>
-
 </html>

@@ -15,7 +15,7 @@
             <h1>Inicio de Sesión</h1>
         </div>
         <div class="contenedor">
-            <form action="eventos1.php" method="post">
+            <form action="eventos.php" method="post">
                 <div class="inputIcon">
                     <input type="text" name="user" id="user"
                      placeholder="Ingrese su nombre de usuario" required>
